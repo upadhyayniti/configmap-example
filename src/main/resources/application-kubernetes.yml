@@ -1,0 +1,9 @@
+management.endpoints.web.exposure.include: health,info
+# Dekorate
+dekorate:
+  kubernetes:
+    labels:
+      - key: app
+        value: configmap
+  options:
+    input-path: kubernetes
