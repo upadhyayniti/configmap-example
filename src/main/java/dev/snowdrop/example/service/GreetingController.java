@@ -28,6 +28,7 @@ public class GreetingController {
 
     private GreetingProperties properties;
     private NewGreetingProperties newproperties;
+    private String greeterMessageFormat; 
 
     @Autowired
     public GreetingController(GreetingProperties properties, NewGreetingProperties newproperties) {
@@ -37,8 +38,8 @@ public class GreetingController {
 
     @RequestMapping("/api/greeting")
     public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-        Objects.requireNonNull(newproperties, "New Properties was not set in the properties");
-        Objects.requireNonNull(newproperties.getNewMessage(), "New Greeting message was not set in the properties");
+//        Objects.requireNonNull(newproperties, "New Properties was not set in the properties");
+//        Objects.requireNonNull(newproperties.getNewMessage(), "New Greeting message was not set in the properties");
 
         String message = String.format(properties.getMessage(), name);
         //use below for new greeting 
@@ -54,5 +55,19 @@ public class GreetingController {
     @RequestMapping("/api/newgreeting/newmessage")
     public String newGreetingMessage() {
         return newproperties.getNewMessage();
+    }
+
+    @RequestMapping("/api/greeting/volume-message")
+    public String greet() {
+
+        String prefix = System.getenv().getOrDefault("GREETING_PREFIX", "Hi ");
+        
+        if (prefix == null) {
+            prefix = "Hello! ";
+        }
+
+        return prefix;
+        
+        
     }
 }

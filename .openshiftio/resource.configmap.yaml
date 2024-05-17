@@ -31,6 +31,8 @@ items:
    kind: ConfigMap
    metadata:
      name: app-config
+   annotations:
+     kubectl.kubernetes.io/last-applied-configuration: ""
    data:
      application.yml: |
        # This properties file should be used to initialise a ConfigMap
@@ -38,3 +40,6 @@ items:
          message: "Hello %s from a ConfigMap!"
        newgreeting:
          newmessage: "New %s New"
+       greeter:
+         prefix: "Howdy"
+
